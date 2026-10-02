@@ -177,6 +177,12 @@ waza tokens compare main --skills --threshold 10
 waza tokens suggest skills/
 ```
 
+### Agent-assisted eval authoring
+
+Point your coding agent at the [Writing Eval Specs guide](https://microsoft.github.io/waza/guides/eval-yaml/)
+to create or update evals and guide eval-driven implementation. It provides the
+canonical workflow, target-specific validation steps, and a reusable delegation prompt.
+
 ## Commands
 
 ### `waza update`
