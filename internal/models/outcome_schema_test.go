@@ -177,23 +177,30 @@ func withSummaryStatistics(schemaVersion, statistics string) string {
 }
 
 func TestParseEvaluationOutcome_LegacyStatisticsRoundTripWithoutInventedFields(t *testing.T) {
-	// 1.4 artifacts predate success_rate_ci and pass_hat_k; re-saving one must not invent them.
-	legacy := withSummaryStatistics("1.4", `{"bootstrap_ci": {"lower": 0.2, "upper": 0.9, "mean": 0.6, "confidence_level": 0.95, "num_bootstraps": 10000}, "is_significant": true}`)
-	outcome, err := ParseEvaluationOutcome([]byte(legacy), "results.json")
-	if err != nil {
-		t.Fatalf("ParseEvaluationOutcome() error = %v", err)
-	}
-	data, err := json.Marshal(outcome)
-	if err != nil {
-		t.Fatalf("Marshal() error = %v", err)
-	}
-	for _, field := range []string{"success_rate_ci", "pass_hat_k"} {
-		if strings.Contains(string(data), field) {
-			t.Errorf("re-saved 1.4 artifact gained %q: %s", field, data)
-		}
-	}
-	if !strings.Contains(string(data), `"schemaVersion":"1.4"`) {
-		t.Errorf("re-saved artifact should keep its schemaVersion 1.4: %s", data)
+	// 1.4 artifacts predate success_rate_ci and pass_hat_k; re-saving one must
+	// not invent them, and must keep the deprecated is_significant as written.
+	for _, significant := range []string{"true", "false"} {
+		t.Run("is_significant="+significant, func(t *testing.T) {
+			legacy := withSummaryStatistics("1.4", `{"bootstrap_ci": {"lower": 0.2, "upper": 0.9, "mean": 0.6, "confidence_level": 0.95, "num_bootstraps": 10000}, "is_significant": `+significant+`}`)
+			outcome, err := ParseEvaluationOutcome([]byte(legacy), "results.json")
+			if err != nil {
+				t.Fatalf("ParseEvaluationOutcome() error = %v", err)
+			}
+			data, err := json.Marshal(outcome)
+			if err != nil {
+				t.Fatalf("Marshal() error = %v", err)
+			}
+			for _, field := range []string{"success_rate_ci", "pass_hat_k"} {
+				if strings.Contains(string(data), field) {
+					t.Errorf("re-saved 1.4 artifact gained %q: %s", field, data)
+				}
+			}
+			for _, want := range []string{`"schemaVersion":"1.4"`, `"is_significant":` + significant} {
+				if !strings.Contains(string(data), want) {
+					t.Errorf("re-saved artifact lost %s: %s", want, data)
+				}
+			}
+		})
 	}
 }
 

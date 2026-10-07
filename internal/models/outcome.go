@@ -500,8 +500,9 @@ type StatisticalSummary struct {
 	PassHatK       []float64 `json:"pass_hat_k,omitempty"`
 	NormalizedGain *float64  `json:"normalized_gain,omitempty"`
 
-	// Deprecated: no longer populated (see TestStats.IsSignificant).
-	IsSignificant bool `json:"is_significant,omitempty"`
+	// Deprecated: no longer populated (see TestStats.IsSignificant). A pointer
+	// so older artifacts round-trip a stored false.
+	IsSignificant *bool `json:"is_significant,omitempty"`
 }
 
 // SkillImpactMetric represents A/B comparison for a single task
