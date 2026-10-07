@@ -493,7 +493,7 @@ type TestStats struct {
 type StatisticalSummary struct {
 	BootstrapCI statistics.ConfidenceInterval `json:"bootstrap_ci"`
 	// Wilson 95% interval on SuccessRate, counting each task as one sample.
-	SuccessRateCI statistics.ConfidenceInterval `json:"success_rate_ci"`
+	SuccessRateCI *statistics.ConfidenceInterval `json:"success_rate_ci,omitempty"`
 	// PassHatK[k-1] is the τ-bench pass^k: the chance that k fresh trials of a
 	// task all pass, averaged over tasks. k runs up to the fewest trials of any task.
 	PassHatK       []float64 `json:"pass_hat_k,omitempty"`

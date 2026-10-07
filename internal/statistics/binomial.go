@@ -27,8 +27,8 @@ func WilsonCI(successes, trials int, confidenceLevel float64) ConfidenceInterval
 }
 
 // PassHatK is the unbiased pass^k estimate from τ-bench (Yao et al., 2024): the
-// probability that k fresh trials of a task all pass, given successes out of
-// trials observed runs, i.e. C(successes, k) / C(trials, k).
+// probability that k fresh trials of a task all pass. For a task that passed
+// `successes` of its `trials` runs, it is C(successes, k) / C(trials, k).
 // Returns 0 when k is outside [1, trials].
 func PassHatK(successes, trials, k int) float64 {
 	if k < 1 || k > trials || successes < k {

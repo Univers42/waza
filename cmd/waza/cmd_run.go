@@ -1320,7 +1320,9 @@ func printSummary(outcome *models.EvaluationOutcome) {
 	fmt.Printf("Max Score:      %.2f\n", digest.MaxScore)
 	fmt.Printf("Std Dev:        %.4f\n", digest.StdDev)
 	if s := digest.Statistics; s != nil {
-		fmt.Printf("Success CI95:   [%.1f%%, %.1f%%]\n", s.SuccessRateCI.Lower*100, s.SuccessRateCI.Upper*100)
+		if ci := s.SuccessRateCI; ci != nil {
+			fmt.Printf("Success CI95:   [%.1f%%, %.1f%%]\n", ci.Lower*100, ci.Upper*100)
+		}
 		if len(s.PassHatK) > 1 {
 			fmt.Printf("Reliability:    %s\n", formatPassHatK(s.PassHatK))
 		}

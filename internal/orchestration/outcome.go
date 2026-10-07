@@ -156,9 +156,10 @@ func BuildDigest(testOutcomes []models.TestOutcome, durationMs int64, runsPerTes
 			}
 		}
 		if len(perTestScores) >= 2 {
+			successCI := statistics.WilsonCI(succeeded, totalTests, 0.95)
 			digest.Statistics = &models.StatisticalSummary{
 				BootstrapCI:   statistics.BootstrapCI(perTestScores, 0.95),
-				SuccessRateCI: statistics.WilsonCI(succeeded, totalTests, 0.95),
+				SuccessRateCI: &successCI,
 				PassHatK:      computePassHatK(testOutcomes),
 			}
 		}

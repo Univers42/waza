@@ -105,6 +105,7 @@ func TestBuildDigest_ReliabilityStatistics(t *testing.T) {
 	assert.InDelta(t, 0.5, d.Statistics.PassHatK[2], 1e-9)
 
 	// Success rate interval treats each task as one sample: 1 of 2 tasks passed.
+	require.NotNil(t, d.Statistics.SuccessRateCI)
 	assert.InDelta(t, 0.5, d.Statistics.SuccessRateCI.Mean, 1e-9)
 	assert.InDelta(t, 0.0945, d.Statistics.SuccessRateCI.Lower, 1e-4)
 	assert.InDelta(t, 0.9055, d.Statistics.SuccessRateCI.Upper, 1e-4)
