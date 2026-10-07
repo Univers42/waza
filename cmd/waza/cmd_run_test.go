@@ -2706,3 +2706,8 @@ func testWazaRun(t *testing.T, cwd string, args []string) (evalNames []string, s
 
 	return slices.Sorted(maps.Keys(evalNamesMap)), slices.Compact(skillsLoaded)
 }
+
+func TestFormatPassHatK(t *testing.T) {
+	assert.Equal(t, "pass^1=83%  pass^2=71%  pass^3=62%", formatPassHatK([]float64{0.8333, 0.7083, 0.625}))
+	assert.Empty(t, formatPassHatK(nil))
+}

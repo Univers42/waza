@@ -108,7 +108,7 @@ graders:
 		assert.Equal(t, "mock-model", testOutcome.Group)
 		require.NotNil(t, testOutcome.Stats)
 		require.NotNil(t, testOutcome.Stats.BootstrapCI)
-		require.NotNil(t, testOutcome.Stats.IsSignificant)
+		require.NotNil(t, testOutcome.Stats.PassRateCI)
 		require.Len(t, testOutcome.Runs, 2)
 
 		for _, run := range testOutcome.Runs {
