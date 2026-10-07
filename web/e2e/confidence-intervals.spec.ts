@@ -6,8 +6,8 @@ test.describe("Confidence Intervals", () => {
     await mockAllAPIs(page);
     await page.goto("/#/runs/run-001");
 
-    // A CI on one task's 0–1 score excludes zero for any positive score, so it
-    // never indicated significance; the badge was removed.
+    // The badge compared a CI on one task's own score with zero, which is not
+    // a significance test, so it was removed.
     await expect(page.locator('[data-testid="ci-range"]').first()).toBeVisible();
     await expect(page.locator('[data-testid="significance-badge"]')).toHaveCount(0);
   });

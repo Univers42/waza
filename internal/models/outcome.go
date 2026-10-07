@@ -484,7 +484,8 @@ type TestStats struct {
 	PassRateCI *statistics.ConfidenceInterval `json:"pass_rate_ci,omitempty"`
 
 	// Deprecated: no longer populated. It tested whether a CI on the task's own
-	// 0–1 score excluded zero, which holds for any positive score. Kept so older
+	// 0–1 score excluded zero, which compares an absolute score with zero instead
+	// of testing a difference, so it was not a significance test. Kept so older
 	// results files load without unknown-field warnings.
 	IsSignificant *bool `json:"is_significant,omitempty"`
 }

@@ -39,7 +39,7 @@ For schema `1.0`, the command is a no-op because there is no prior major version
 ### 1.5
 
 - Added optional `tasks[].stats.pass_rate_ci` (Wilson 95% interval on each task's pass rate) and `summary.statistics.success_rate_ci` and `pass_hat_k` (suite success-rate interval and pass^k reliability curve) to `results.json`. See [Statistical Fields](../statistical-fields/).
-- `is_significant` is no longer written. It tested whether a CI on a task's own 0–1 score excluded zero, which holds for any positive score. Readers still accept it in older artifacts.
+- `is_significant` is no longer written. It tested whether a CI on a task's own 0–1 score excluded zero, which compares an absolute score with zero instead of testing a difference between runs. Readers still accept it in older artifacts.
 
 ### 1.4
 

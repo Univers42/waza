@@ -83,7 +83,8 @@ func BootstrapCIWithSeed(scores []float64, confidenceLevel float64, seed int64) 
 // IsSignificant returns true if the confidence interval does not contain zero,
 // indicating statistical significance at the given confidence level. It is only
 // meaningful for an interval on a difference (e.g. treatment minus baseline);
-// an interval on a 0–1 score excludes zero whenever the score is positive.
+// for an interval on an absolute, non-negative score it only says the score is
+// above zero.
 func IsSignificant(ci ConfidenceInterval) bool {
 	return ci.Lower > 0 || ci.Upper < 0
 }

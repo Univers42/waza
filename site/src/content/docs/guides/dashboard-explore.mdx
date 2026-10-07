@@ -167,10 +167,10 @@ The W. Score column in the Tasks table shows the weighted aggregate score for ea
 
 ## Statistical Confidence
 
-Tasks run with more than one trial show a 95% bootstrap confidence interval under the weighted score. It shows how much the score varied across trials, so you can tell a consistent result from noise.
+Tasks run with more than one trial show a 95% bootstrap confidence interval under the weighted score. It shows how precisely the trials pin down the task's average score: its width depends on how much trial scores varied and on how many trials ran.
 
 <ZoomImage src="../../images/explore/statistical-confidence.png" alt="Task rows showing confidence interval ranges under the weighted scores" />
 
-- **Narrow range** (e.g., [82.0%, 98.0%]) — the score was consistent across trials
-- **Wide range** — the score varied a lot; add trials before trusting it
+- **Narrow range** (e.g., [82.0%, 98.0%]) — the average score is well determined by the trials run
+- **Wide range** — the average score is still uncertain; add trials before trusting it
 - **Pass/fail reliability** — for the pass-rate interval and the pass^k reliability curve, see [Statistical Fields](../../reference/statistical-fields/)

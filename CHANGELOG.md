@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- **Misleading significance flag** — `is_significant` and the dashboard's "✓ significant" badge tested whether a CI on a task's own 0–1 score excluded zero, which is true for any positive score. The field is no longer populated (older results files still load) and the badge is removed.
+- **Misleading significance flag** — `is_significant` and the dashboard's "✓ significant" badge tested whether a CI on a task's own 0–1 score excluded zero. That compares an absolute, non-negative score with zero instead of testing a difference between runs, so it was not a significance test. The field is no longer populated (older results files still load) and the badge is removed.
 
 ## [0.38.6] - 2026-08-14
 

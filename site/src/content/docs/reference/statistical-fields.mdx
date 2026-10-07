@@ -83,7 +83,7 @@ With only a few trials a bootstrap interval is too narrow, so prefer `pass_rate_
 
 ## Significance (`is_significant`, no longer populated)
 
-Earlier versions set `is_significant` to `true` when a task's `bootstrap_ci` excluded zero. That interval is on the task's own 0–1 score, so it excludes zero for any task that ever scores above zero: the flag, and the dashboard's "significant" badge, did not indicate statistical significance. It is no longer populated, and older results files that contain it still load.
+Earlier versions set `is_significant` to `true` when a task's `bootstrap_ci` excluded zero. That interval is on the task's own score, which can't be negative, so the check only asked whether the score was above zero. It compared nothing, so neither the flag nor the dashboard's "significant" badge indicated statistical significance. It is no longer populated, and older results files that contain it still load.
 
 Significance applies to a **difference**, such as with-skill minus baseline. The intervals on this page describe each run on its own, so comparing two runs' intervals cannot establish whether a change is real: overlapping intervals can still hide a significant difference, and runs over the same tasks need a paired comparison of per-task results.
 
