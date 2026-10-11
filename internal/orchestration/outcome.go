@@ -175,7 +175,7 @@ func computePassHatK(testOutcomes []models.TestOutcome) []float64 {
 	var counted []*models.TestStats
 	for _, to := range testOutcomes {
 		if to.Stats == nil || to.Stats.TotalRuns == 0 {
-			continue
+			return nil
 		}
 		if maxK == 0 || to.Stats.TotalRuns < maxK {
 			maxK = to.Stats.TotalRuns
